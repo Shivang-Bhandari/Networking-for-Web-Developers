@@ -23,6 +23,8 @@ When it is complete, you can log into the Linux instance with `vagrant ssh`. You
 
 If you log out of the Linux instance or close the terminal, the next time you want to use it you only need to run `cd networking` and `vagrant ssh`.
 
+----
+
 ### Installing networking tools
 SSH into your Linux machine. Then take a moment to bring it up to date with any package updates: `sudo apt-get update && sudo apt-get upgrade`
 
@@ -98,6 +100,7 @@ If you would like to save the results of an nc command to a file, you can do thi
 
 `printf "GET / HTTP/1.1\r\nHost: www.example.com\r\n\r\n" | nc www.example.com 80 > example.txt`
 
+----
 
 ### Ports :
 
@@ -129,6 +132,8 @@ A machine on the internet that might host services.
 #### End Points :
 Two programs or machines communicating over the network.
 
+-----
+
 ### DNS :
 The Domain Name System (DNS) is a hierarchical decentralized naming system for computers, services, or other resources connected to the Internet or a private network. It associates various information with domain names assigned to each of the participating entities.
 
@@ -137,6 +142,10 @@ a wide variety of records but the best known kind of DNS is the A Record, which 
 www.example.com to an IPv4 Address. Client programs such as web browsers look up these records
 in order to find the address of a website or a web service.
 DNS Domains are also used as a part of security mechanisms like HTTP, including SSL encryption and Cookie Privacy.
+
+DNS is a distributed directory with some root servers all around the world, which direct requests to top-level domain servers like for `.com` which in turn forward requests to the Domain Servers therefore eradicating the need for a DNS server to have all the cords for domains around the world. For every client request, there is a Caching DNS Server which handles the requests. Resolvers usually talk to Caching DNS Servers which in turn look into their cache and return the necessary details back to the client. If the Caching Server doesn't have the required data, it will then forward the request to a Root Server (might even be to a top/low level domain server), store the details returned by the Root Server in it's Cache and then return the data to the Client.
+
+DNS Records also have a Time to Live (TTL) which is tells caches how long to cache them for. After that particular time period the caching servers have to go back to the authoritative server back again and look the record up to ensure that the information they have is fresh.
 
 ##### The Resolver : DNS Client code built into your operating systems
 
@@ -149,6 +158,8 @@ The host command is a basic utility for looking up records in DNS. It will query
 The dig command does the same job as that of host but it returns the results in a more readable form for scripts. It has a Question Section containing what we sent and an Answer Section with what we got in return to that request.
 Dig also tells us which server answered our query, and also has some other fields which specify how did the query work
 
+----
+
 #### Some Important Keys :
 
 * A Canonical Name record (abbreviated as CNAME record) is a type of resource record in the Domain Name System (DNS) used to specify that a domain name is an alias for another domain, which is the "canonical" domain.
@@ -156,3 +167,25 @@ Dig also tells us which server answered our query, and also has some other field
 * The AAAA Record. Much like the A record is to the IPv4 address space, the AAAA record (also known as a quad-A record) is to the IPv6 address space. An easy way to remember this is IPv4 addresses are 32 bits, and IPv6 addresses are 128 bits, so if an A record is 32 bits, 4xA (or AAAA) is 128 bits
 
 * An NS record is used to delegate a subdomain to a set of name servers. Whenever you delegate a domain to DNSimple the TLD authorities place NS records for your domain in the TLD name servers pointing to us.
+
+### Sub Domains and FQDNS :
+
+DNS domains are structured as a tree with `.com` at the top hierarchy and `.edu, .net` next to it.
+There is a collection of servers which are responsible for storing all the domains.
+Now, `www.example.com` is a subdomain of `example.com` and so `test.www.example.com` is a subdomain of `www.example.com` .
+There is a possibility that there may be a host with an IP Address and an A Certificate, and there can be a different host for the subdomain.
+These days many organizations have their domain pointed at `example.com` with a C-NAME or an alias set at `www.example.com`.
+
+##### Seach Domain :  setting in the resolver configuration that makes the resolver look up names inside a domain
+
+-----
+
+### IPv4 :
+This is the older version of IP which is used by majiority. These are usually written as dotted quads that is four numbers seperated by dots.
+Each of this numbers is 1 byte or 8 bits which means it can have a value from anything between 0-255.
+`Example : 127.0.0.1`
+
+-----
+
+Earlier we noticed the highest port number we can connect to to using nc is 65535.
+The reason for that is the port number field in the TCP packet header is 16 bits wide and it cannot exceed a value more than 65535.
