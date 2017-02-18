@@ -97,3 +97,28 @@ How would you separate the headers from the data in the response you get here?
 If you would like to save the results of an nc command to a file, you can do this with the > shell redirection operator. For instance, this will save the results to the file example.txt:
 
 `printf "GET / HTTP/1.1\r\nHost: www.example.com\r\n\r\n" | nc www.example.com 80 > example.txt`
+
+
+### Ports :
+
+#### Below are some of the following points to remember :
+
+* Minimum Port number to which a ssh can listen : 1024 1023 and below reserved for superuser
+* Maximum Port number to which a ssh can listen : 65535 not an arbitrary limit
+
+NOTE : In order to listen to ports below 1024 run the command as root using sudo
+
+If more than one ssh session try to listen to a single port, then, NetCat gives an error
+ `nc : Address already in use`
+
+ Normally one program can listen to a port at one time but once the program starts,
+ it can run threads or child processes which can handle the incoming traffic on the port.
+ This is the methodology used by a webserver to handle more than one connection at a time.
+ `nc -l` is not able to do this because it is not a proper server but just a listener which
+ accepts a single connection
+
+ There is a standard linux program which can be used to find out which programs are listening
+ to a port named `lsof`
+ The lsof program name stands for `List open Files`
+
+##### Use `sudo lsof -i` to list only network sockets. The commands listening will have a `(LISTEN)`
