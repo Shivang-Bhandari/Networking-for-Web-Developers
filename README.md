@@ -122,3 +122,37 @@ If more than one ssh session try to listen to a single port, then, NetCat gives 
  The lsof program name stands for `List open Files`
 
 ##### Use `sudo lsof -i` to list only network sockets. The commands listening will have a `(LISTEN)`
+
+#### Hosts :
+A machine on the internet that might host services.
+
+#### End Points :
+Two programs or machines communicating over the network.
+
+### DNS :
+The Domain Name System (DNS) is a hierarchical decentralized naming system for computers, services, or other resources connected to the Internet or a private network. It associates various information with domain names assigned to each of the participating entities.
+
+In simple words DNS is a worldwide distributed directory of network information, It stores
+a wide variety of records but the best known kind of DNS is the A Record, which maps a name like
+www.example.com to an IPv4 Address. Client programs such as web browsers look up these records
+in order to find the address of a website or a web service.
+DNS Domains are also used as a part of security mechanisms like HTTP, including SSL encryption and Cookie Privacy.
+
+##### The Resolver : DNS Client code built into your operating systems
+
+### Host :
+The host command is a basic utility for looking up records in DNS. It will query the OS Name Service, which usually ends up sending a request to whatever DNS server your computer's configured to use.
+
+#####`Quick Look` : run `host -t a example.com` and it will return the IPv4 Address for it.
+
+### Dig :
+The dig command does the same job as that of host but it returns the results in a more readable form for scripts. It has a Question Section containing what we sent and an Answer Section with what we got in return to that request.
+Dig also tells us which server answered our query, and also has some other fields which specify how did the query work
+
+#### Some Important Keys :
+
+* A Canonical Name record (abbreviated as CNAME record) is a type of resource record in the Domain Name System (DNS) used to specify that a domain name is an alias for another domain, which is the "canonical" domain.
+
+* The AAAA Record. Much like the A record is to the IPv4 address space, the AAAA record (also known as a quad-A record) is to the IPv6 address space. An easy way to remember this is IPv4 addresses are 32 bits, and IPv6 addresses are 128 bits, so if an A record is 32 bits, 4xA (or AAAA) is 128 bits
+
+* An NS record is used to delegate a subdomain to a set of name servers. Whenever you delegate a domain to DNSimple the TLD authorities place NS records for your domain in the TLD name servers pointing to us.
