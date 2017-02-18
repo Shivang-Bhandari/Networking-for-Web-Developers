@@ -40,6 +40,8 @@ There are two reasons to do this update now: first, it's a good practice to keep
 
 Once this installation completes, your machine is ready to do the exercises in this course.
 
+![interet](1.png)
+
 ### Getting the Taste :
 
 ##### To get a taste now let's try a command :
@@ -106,8 +108,8 @@ If you would like to save the results of an nc command to a file, you can do thi
 
 #### Below are some of the following points to remember :
 
-* Minimum Port number to which a ssh can listen : 1024 1023 and below reserved for superuser
-* Maximum Port number to which a ssh can listen : 65535 not an arbitrary limit
+* Minimum Port number to which a ssh can listen : 1024 (1023 and below reserved for superuser)
+* Maximum Port number to which a ssh can listen : 65535 (not an arbitrary limit)
 
 NOTE : In order to listen to ports below 1024 run the command as root using sudo
 
@@ -132,6 +134,7 @@ A machine on the internet that might host services.
 #### End Points :
 Two programs or machines communicating over the network.
 
+![protocols](2.png)
 -----
 
 ### DNS :
@@ -182,8 +185,10 @@ These days many organizations have their domain pointed at `example.com` with a 
 
 ### IPv4 :
 This is the older version of IP which is used by majiority. These are usually written as dotted quads that is four numbers seperated by dots.
-Each of this numbers is 1 byte or 8 bits which means it can have a value from anything between 0-255.
-`Example : 127.0.0.1`
+Each of this numbers is 1 byte or 8 bits which means it can have a value from anything between 0-255.  
+`Example : 127.0.0.1`   
+Here, not all of the 32 bits can b used to assign real addresses. Some of them are reserved for special protocols, internal private networks , testing.
+
 
 -----
 
