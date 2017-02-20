@@ -135,6 +135,7 @@ A machine on the internet that might host services.
 Two programs or machines communicating over the network.
 
 ![protocols](2.png)
+
 -----
 
 ### DNS :
@@ -187,10 +188,41 @@ These days many organizations have their domain pointed at `example.com` with a 
 This is the older version of IP which is used by majiority. These are usually written as dotted quads that is four numbers seperated by dots.
 Each of this numbers is 1 byte or 8 bits which means it can have a value from anything between 0-255.  
 `Example : 127.0.0.1`   
-Here, not all of the 32 bits can b used to assign real addresses. Some of them are reserved for special protocols, internal private networks , testing.
+Here, not all of the 32 bits can b used to assign real addresses. Some of them are reserved for special protocols, internal private networks , testing.  
+Here's a visualization of the entire IPv4 address space. Each square represents one possible value of the first octet of an address. For instance, the square on the top right, labeled 15, represents all the IPv4 addresses that start with 15 as their first octet.  
 
+![ipv4](ip.png)    
+
+Here :
+
+* The light-green squares (`0, 10, and 127`) are blocks that are entirely reserved.
+* The dark-green squares are blocks that are partly reserved. For instance, not all of the `192` block is reserved, but some of it is.
+* The entire cyan row (`starting at 224`) is set aside for [IP multicast](https://en.wikipedia.org/wiki/IP_multicast).
+* And the entire orange bottom row (starting at 240) `was originally set aside for "future use" but was effectively lost due to being blocked as invalid`. No, really. We lost 1/16th of all IPv4 addresses due to mistaken planning.
 
 -----
 
 Earlier we noticed the highest port number we can connect to to using nc is 65535.
 The reason for that is the port number field in the TCP packet header is 16 bits wide and it cannot exceed a value more than 65535.
+
+-----
+
+Systems which are on a same network usually have a similar IP to each other. To be more specific,
+All of the addresses on a specific network block share a particular prefix. They all start the same and differ after a particular bit position.   
+Computers which are on the same network usually can talk to other computers without going through the router.
+A network prefix length is something to be chosen before the network is setup because it further determines the number of hosts that can connect to the network.   
+For instance if you have a network with 16 bit prefix, it means there are 16 bits left for the hosts. We would conventionally write it as : 198.100.0.0/16    
+`Number of hosts for a network` : 2<sup>(host bits)<sup> - 3      
+
+NOTE : 3 addresses are reserved.
+
+
+### Subnet Mask :
+
+A subnet mask is a screen of numbers used for routing traffic within a subnet. Once a packet has arrived at an organization's gateway or connection point with its unique network number, it can be routed to its destination within the organization's internal gateways using the subnet number.
+
+In other words,   
+It is a binary number with one's on the left and zeroes on the right to indicate the size of the network. They are often seen in network configuration of the hosts.   
+Like IPv4, Subnet Masks have a 32 bit value which is also written as decimal dotted quads.
+
+![subnet](subnet.png)
