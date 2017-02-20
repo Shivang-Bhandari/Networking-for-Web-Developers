@@ -212,9 +212,9 @@ All of the addresses on a specific network block share a particular prefix. They
 Computers which are on the same network usually can talk to other computers without going through the router.
 A network prefix length is something to be chosen before the network is setup because it further determines the number of hosts that can connect to the network.   
 For instance if you have a network with 16 bit prefix, it means there are 16 bits left for the hosts. We would conventionally write it as : 198.100.0.0/16    
-`Number of hosts for a network` : 2<sup>(host bits)<sup> - 3      
+`Number of hosts for a network` : 2<sup>(host bits)<sup>     
 
-NOTE : 3 addresses are reserved.
+NOTE : 3 addresses are reserved. Therefore Available addresses for use are (total-3)
 
 
 ### Subnet Mask :
@@ -226,3 +226,48 @@ It is a binary number with one's on the left and zeroes on the right to indicate
 Like IPv4, Subnet Masks have a 32 bit value which is also written as decimal dotted quads.
 
 ![subnet](subnet.png)
+
+
+### Drawbacks of IPv4 :
+
+Since there are only a limited number of bits which can be assigned for serving addresses to hosts
+even one of which are reserved, there arises a big problem of availability of an unique IP Address
+for each user around the globe.  
+Since Packet Delivery works on the basis of source and destination IP therefore this shortage of IP
+is a problem which was fixed by IPv6.
+
+### The Truth about IP Addresses :
+
+The host does not ever have an IP Address, rather the Interface on the host is assigned an IP Address. A host can have multiple network interfaces and each interface might have one or more addresses.     
+On Linux the interfaces can be found with : `ip addr show`
+On Mac or UNIX : `ifconfig | less`
+
+##### LoopBack :
+The Loopback is a special interface that almost always have the IP Address `127.0.0.1`.
+It helps communication over the Local Network Stack. Anytime you have been using your localhost, it is the Loopback in action.
+
+### Routers and Default Gateways :
+In general Router is a device which helps connect two IP Networks. It acts as a gateway. Hosts on one network want to send traffic to the other one, forward that traffic through router. The router always holds two IP addresses one from each network and one IP Address provided by the ISP.
+
+![router](router.png)
+
+
+##### We can find the Default Gateway Using :
+* Linux : `ip route show default`
+* Max|Unix : `netstat -nr`
+
+### NAT :
+
+Network address translation (NAT) is a method of remapping one IP address space into another by modifying network address information in Internet Protocol (IP) datagram packet headers while they are in transit across a traffic routing device.[1] The technique was originally used for ease of rerouting traffic in IP networks without readdressing every host. In more advanced NAT implementations featuring IP masquerading, it has become a popular and essential tool in conserving global address space allocations in face of IPv4 address exhaustion by sharing one Internet-routable IP address of a NAT gateway for an entire private network.      
+
+IP masquerading is a technique that hides an entire IP address space, usually consisting of private IP addresses, behind a single IP address in another, usually public address space. The address that has to be hidden is changed into a single (public) IP address as "new" source address of the outgoing IP packet so it appears as originating not from the hidden host but from the routing device itself. Because of the popularity of this technique to conserve IPv4 address space, the term NAT has become virtually synonymous with IP masquerading.       
+
+As network address translation modifies the IP address information in packets, it has serious consequences on the quality of Internet connectivity and requires careful attention to the details of its implementation. NAT implementations vary widely in their specific behavior in various addressing cases and their effect on network traffic. The specifics of NAT behavior is not commonly documented by vendors of equipment containing implementations.      
+
+----------
+
+### IPv6 :
+
+Internet Protocol version 6 (IPv6) is the most recent version of the Internet Protocol (IP), the communications protocol that provides an identification and location system for computers on networks and routes traffic across the Internet. IPv6 was developed by the Internet Engineering Task Force (IETF) to deal with the long-anticipated problem of IPv4 address exhaustion. IPv6 is intended to replace IPv4. It is 128 bits (4 times that of IPv4) giving a really long IP Address but in turn also solving the major issue of IPv4. Moreover, They are written in hex digits, in blocks of 2 bytes separated by colons.   
+This has now eliminated the need for NAT as there are enough IP Addresses for each device.  
+For testing if you have an IPv6 or not visit http://test-ipv6.com
