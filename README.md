@@ -254,7 +254,7 @@ In general Router is a device which helps connect two IP Networks. It acts as a 
 
 ##### We can find the Default Gateway Using :
 * Linux : `ip route show default`
-* Max|Unix : `netstat -nr`
+* Mac|Unix : `netstat -nr`
 
 ### NAT :
 
